@@ -1,0 +1,36 @@
+{
+  "id": "portfolio-1",
+  "asOf": "2024-03-01T00:00:00.000Z",
+  "positions": [
+    {
+      "id": 1,
+      "asset": "asset-aapl",
+      "quantity": 50,
+      "asOf": "2024-03-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "asset": "asset-tsla",
+      "quantity": 20,
+      "asOf": "2024-03-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "asset": "asset-btc",
+      "quantity": 0.75,
+      "asOf": "2024-03-01T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "asset": "asset-eth",
+      "quantity": 5,
+      "asOf": "2024-03-01T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "asset": "asset-gbp",
+      "quantity": 10000,
+      "asOf": "2024-03-01T00:00:00.000Z"
+    }
+  ]
+}
