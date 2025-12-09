@@ -23,18 +23,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   })
 
   useEffect(() => {
-    // Keep localStorage in sync if needed elsewhere
     if (user) localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
     else localStorage.removeItem(STORAGE_KEY)
   }, [user])
 
+  // validate username — do not default to "guest"
   const signin = (username: string) =>
-    new Promise<void>((resolve) => {
+    new Promise<void>((resolve, reject) => {
+      const trimmed = username.trim()
+      if (!trimmed) {
+        reject(new Error('username required'))
+        return
+      }
+
       // fake async auth (replace with real call)
       setTimeout(() => {
-        const u: User = { username }
+        const u: User = { username: trimmed }
         setUser(u)
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(u))
         resolve()
       }, 400)
     })

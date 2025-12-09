@@ -9,6 +9,7 @@ type LocationState = {
 export const Login: React.FC = () => {
   const [username, setUsername] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const auth = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -17,10 +18,23 @@ export const Login: React.FC = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    setError(null)
+    const trimmed = username.trim()
+    if (!trimmed) {
+      setError('Please enter a username')
+      return
+    }
+
     setLoading(true)
-    await auth.signin(username || 'guest')
-    setLoading(false)
-    navigate(from, { replace: true })
+    try {
+      await auth.signin(trimmed)
+      navigate(from, { replace: true })
+    } catch (err) {
+      // provider may reject; show a generic error
+      setError((err as Error)?.message ?? 'Sign in failed')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -29,9 +43,19 @@ export const Login: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Username
-          <input value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            aria-invalid={!!error}
+            aria-describedby={error ? 'login-error' : undefined}
+          />
         </label>
-        <button type="submit" disabled={loading}>
+        {error ? (
+          <div id="login-error" role="alert" style={{ color: 'red', marginTop: 8 }}>
+            {error}
+          </div>
+        ) : null}
+        <button type="submit" disabled={loading || !username.trim()}>
           {loading ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
