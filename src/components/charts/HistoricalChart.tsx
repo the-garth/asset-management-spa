@@ -38,7 +38,7 @@ export const HistoricalChart: React.FC<HistoricalChartProps> = ({
     <div className="w-full min-w-0 min-h-0" style={{ height: 256 }}>
       {/* explicit numeric height ensures ResponsiveContainer can measure in all environments */}
       <ResponsiveContainer width="100%" height={256} minWidth={0} minHeight={0}>
-         <LineChart data={chartData}>
+         <LineChart data={chartData} margin={{ top: 5, right: 20, left: 40, bottom: 5 }}>
            <CartesianGrid strokeDasharray="3 3" />
            <XAxis dataKey="label" />
            <YAxis
@@ -59,7 +59,7 @@ export const HistoricalChart: React.FC<HistoricalChartProps> = ({
            <Line
              type="monotone"
              dataKey="value"
-             stroke="#1d4ed8"
+             stroke="var(--color-brand)"
              dot={false}
              strokeWidth={2}
            />

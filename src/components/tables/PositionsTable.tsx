@@ -11,14 +11,14 @@ export const PositionsTable: React.FC<PositionsTableProps> = ({
 }) => {
   if (!positions.length) {
     return (
-      <div className="text-sm text-slate-500">
+      <div className="text-sm" style={{ color: 'var(--color-muted)' }}>
         No positions to display.
       </div>
     );
   }
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto" style={{ color: 'var(--color-text)' }}>
       <table className="min-w-full w-full table-fixed text-left text-sm border-collapse">
         <colgroup>
           <col style={{ width: '36%' }} />
@@ -29,26 +29,27 @@ export const PositionsTable: React.FC<PositionsTableProps> = ({
           <col style={{ width: '16%' }} />
         </colgroup>
 
-        <thead className="bg-slate-50">
-          <tr className="border-b border-slate-200">
-            <th className="px-3 py-2 font-medium text-slate-600">Asset</th>
-            <th className="px-3 py-2 font-medium text-slate-600">Type</th>
-            <th className="px-3 py-2 font-medium text-slate-600 text-right">Quantity</th>
-            <th className="px-3 py-2 font-medium text-slate-600 text-right">Price (USD)</th>
-            <th className="px-3 py-2 font-medium text-slate-600 text-right">Value (USD)</th>
-            <th className="px-3 py-2 font-medium text-slate-600 text-right">% Allocation</th>
+        <thead style={{ backgroundColor: 'transparent' }}>
+          <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
+            <th className="px-3 py-2 font-medium" style={{ color: 'var(--color-muted)' }}>Asset</th>
+            <th className="px-3 py-2 font-medium" style={{ color: 'var(--color-muted)' }}>Type</th>
+            <th className="px-3 py-2 font-medium text-right" style={{ color: 'var(--color-muted)' }}>Quantity</th>
+            <th className="px-3 py-2 font-medium text-right" style={{ color: 'var(--color-muted)' }}>Price (USD)</th>
+            <th className="px-3 py-2 font-medium text-right" style={{ color: 'var(--color-muted)' }}>Value (USD)</th>
+            <th className="px-3 py-2 font-medium text-right" style={{ color: 'var(--color-muted)' }}>% Allocation</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100 bg-white">
+        <tbody style={{ backgroundColor: 'transparent' }}>
           {positions.map((pos) => (
             <tr
               key={pos.positionId}
-              className="last:border-0 hover:bg-slate-50/60"
+              className="last:border-0 hover:bg-slate-50/6"
+              style={{ borderBottom: '1px solid rgba(0,0,0,0.03)' }}
             >
-              <td className="px-3 py-2 whitespace-nowrap font-medium text-slate-800">
+              <td className="px-3 py-2 whitespace-nowrap font-medium" style={{ color: 'var(--color-heading)' }}>
                 {pos.assetName}
               </td>
-              <td className="px-3 py-2 capitalize text-slate-600">
+              <td className="px-3 py-2 capitalize" style={{ color: 'var(--color-muted)' }}>
                 {pos.assetType}
               </td>
               <td className="px-3 py-2 text-right tabular-nums">

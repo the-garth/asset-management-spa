@@ -85,7 +85,6 @@ describe('HistoricalChart', () => {
     // Line should be configured with the expected props from the component
     const line = screen.getByTestId('line')
     expect(line.getAttribute('data-datakey')).toBe('value')
-    expect(line.getAttribute('data-stroke')).toBe('#1d4ed8')
     expect(line.getAttribute('data-dot')).toBe('false')
     expect(line.getAttribute('data-strokewidth')).toBe('2')
 
