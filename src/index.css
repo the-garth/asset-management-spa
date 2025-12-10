@@ -1,3 +1,30 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg: theme('colors.gray.50');
+    --color-card-bg: theme('colors.white');
+    --color-text: theme('colors.slate.800');
+    --color-brand: theme('colors.indigo.600');
+    --color-border: theme('colors.slate.200');
+  }
+
+  /* dark theme overrides */
+  [data-theme='dark'] {
+    --color-bg: theme('colors.slate.900');
+    --color-card-bg: theme('colors.slate.800');
+    --color-text: theme('colors.slate.100');
+    --color-brand: theme('colors.indigo.400');
+    --color-border: theme('colors.slate.700');
+  }
+
+  /* sensible defaults driven by tokens */
+  html, body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
