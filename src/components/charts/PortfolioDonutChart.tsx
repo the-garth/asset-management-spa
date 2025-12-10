@@ -17,7 +17,15 @@ interface PortfolioDonutChartProps {
 export const PortfolioDonutChart: React.FC<PortfolioDonutChartProps> = ({
   data,
 }) => {
-  const COLORS = ['#1d4ed8', '#16a34a', '#f97316', '#ec4899', '#0ea5e9', '#a855f7'];
+  // Use themed CSS variables with sensible fallbacks
+  const COLORS = [
+    'var(--color-brand, #0891b2)', // changed to teal so it's distinct from success (green)
+    'var(--color-success, #16a34a)',
+    'var(--color-warning, #f97316)',
+    'var(--color-accent, #ec4899)',
+    'var(--color-info, #0ea5e9)',
+    'var(--color-secondary, #a855f7)',
+  ];
 
   const chartData = data.map((item) => ({
     name: item.label,

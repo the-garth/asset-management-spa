@@ -53,7 +53,11 @@ describe('PortfolioDonutChart', () => {
 
     // Colors are defined in the component; check that fills exist on the mocked cells
     // (order must match the component's COLORS array)
-    const expectedColors = ['#1d4ed8', '#16a34a', '#f97316']
+    const expectedColors = [
+      'var(--color-brand, #0891b2)',
+      'var(--color-success, #16a34a)',
+      'var(--color-warning, #f97316)',
+    ]
     cells.forEach((c, idx) => {
       expect(c.getAttribute('data-fill')).toBe(expectedColors[idx])
     })

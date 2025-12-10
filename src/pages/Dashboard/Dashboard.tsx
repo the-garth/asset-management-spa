@@ -125,7 +125,7 @@ export const Dashboard: React.FC = () => {
               <div className="flex justify-between">
                 <span style={{ color: 'var(--color-muted)' }}>As of</span>
                  <span className="font-medium">
-                   {new Date(overview.asOf).toLocaleString()}
+                  {overview.asOf && new Date(overview.asOf).toLocaleDateString()}
                  </span>
                </div>
            </div>
