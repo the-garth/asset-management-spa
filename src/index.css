@@ -7,7 +7,7 @@
     --color-text: theme('colors.slate.800');
     --color-heading: theme('colors.slate.900');
     --color-muted: theme('colors.slate.500');
-    --color-brand: theme('colors.green.600');
+    --color-brand: theme('colors.teal.700');
     --color-border: theme('colors.slate.200');
 
     /* convenience aliases */
@@ -22,7 +22,7 @@
     --color-text: theme('colors.slate.100');
     --color-heading: theme('colors.slate.200');
     --color-muted: theme('colors.slate.400');
-    --color-brand: theme('colors.green.400');
+    --color-brand: theme('colors.teal.400');
     --color-border: theme('colors.slate.700');
 
     --color-link: var(--color-brand);
