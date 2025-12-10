@@ -1,0 +1,32 @@
+[
+  {
+    "id": "price-aapl-2024-03-01",
+    "asset": "asset-aapl",
+    "price": 180.5,
+    "asOf": "2024-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "price-tsla-2024-03-01",
+    "asset": "asset-tsla",
+    "price": 200.1,
+    "asOf": "2024-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "price-btc-2024-03-01",
+    "asset": "asset-btc",
+    "price": 52000,
+    "asOf": "2024-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "price-eth-2024-03-01",
+    "asset": "asset-eth",
+    "price": 3200,
+    "asOf": "2024-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "price-gbp-2024-03-01",
+    "asset": "asset-gbp",
+    "price": 1.27,
+    "asOf": "2024-03-01T00:00:00.000Z"
+  }
+]

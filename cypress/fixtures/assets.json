@@ -1,0 +1,27 @@
+[
+  {
+    "id": "asset-aapl",
+    "name": "AAPL",
+    "type": "stock"
+  },
+  {
+    "id": "asset-tsla",
+    "name": "TSLA",
+    "type": "stock"
+  },
+  {
+    "id": "asset-btc",
+    "name": "BTC",
+    "type": "crypto"
+  },
+  {
+    "id": "asset-eth",
+    "name": "ETH",
+    "type": "crypto"
+  },
+  {
+    "id": "asset-gbp",
+    "name": "GBP",
+    "type": "fiat"
+  }
+]

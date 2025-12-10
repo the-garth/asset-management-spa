@@ -1,0 +1,21 @@
+[
+  { "date": "2024-02-01", "asset": "asset-aapl", "price": 170 },
+  { "date": "2024-02-02", "asset": "asset-aapl", "price": 171 },
+  { "date": "2024-02-03", "asset": "asset-aapl", "price": 169 },
+
+  { "date": "2024-02-01", "asset": "asset-tsla", "price": 190 },
+  { "date": "2024-02-02", "asset": "asset-tsla", "price": 192 },
+  { "date": "2024-02-03", "asset": "asset-tsla", "price": 188 },
+
+  { "date": "2024-02-01", "asset": "asset-btc", "price": 50000 },
+  { "date": "2024-02-02", "asset": "asset-btc", "price": 51000 },
+  { "date": "2024-02-03", "asset": "asset-btc", "price": 49500 },
+
+  { "date": "2024-02-01", "asset": "asset-eth", "price": 3000 },
+  { "date": "2024-02-02", "asset": "asset-eth", "price": 3050 },
+  { "date": "2024-02-03", "asset": "asset-eth", "price": 2980 },
+
+  { "date": "2024-02-01", "asset": "asset-gbp", "price": 1.25 },
+  { "date": "2024-02-02", "asset": "asset-gbp", "price": 1.26 },
+  { "date": "2024-02-03", "asset": "asset-gbp", "price": 1.27 }
+]
