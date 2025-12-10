@@ -69,10 +69,8 @@ export const Dashboard: React.FC = () => {
               <div className="inline-flex rounded-md border border-slate-200 overflow-hidden text-sm">
                 <button
                   type="button"
-                  onClick={() => {
-                    console.log('class')
-                    setAllocationView('class')
-                  }}
+                  onClick={() => setAllocationView('class')}
+
                   className={`px-3 py-1 ${
                     allocationView === 'class'
                       ? 'bg-brand text-white'
@@ -83,9 +81,7 @@ export const Dashboard: React.FC = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    console.log('asset')
-                    setAllocationView('asset')}}
+                  onClick={() => setAllocationView('asset')}
                   className={`px-3 py-1 ${
                     allocationView === 'asset'
                       ? 'bg-brand text-white'
@@ -123,8 +119,8 @@ export const Dashboard: React.FC = () => {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Positions</span>
-                <span className="font-semibold">
+                <span className="text-slate-500">Positions</span> 
+                <span className="font-semibold ml-2">
                   {overview.positions.length}
                 </span>
               </div>
@@ -149,8 +145,6 @@ export const Dashboard: React.FC = () => {
         </h2>
         <HistoricalChart data={historicalSeries} />
       </Card>
-        {/* <pre style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{JSON.stringify(overview, null, 2)}</pre>
-        <pre style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{JSON.stringify(historicalSeries, null, 2)}</pre> */}
       </div>
       <p>Welcome, {user?.username ?? 'unknown'}!</p>
       <button onClick={handleLogout}>Sign out</button>
