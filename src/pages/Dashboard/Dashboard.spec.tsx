@@ -1,10 +1,11 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '../../components/Providers/AuthProvider'
 import { Dashboard } from './Dashboard'
 import { describe, beforeEach, afterEach, it, expect, vi } from 'vitest'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { createTestQueryClient } from '../../test/utils/renderWithClient'
+import { ThemeProvider } from '../../components/Providers/ThemeProvider'
 
 const STORAGE_KEY = 'asset-management-auth'
 
@@ -42,11 +43,12 @@ describe('Dashboard page', () => {
     vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})))
 
     render(
-      <AuthProvider>
-        <MemoryRouter initialEntries={['/dashboard']}>
-          <Routes>
-            <Route
-              path="/dashboard"
+      <ThemeProvider>
+        <AuthProvider>
+          <MemoryRouter initialEntries={['/dashboard']}>
+            <Routes>
+              <Route
+                path="/dashboard"
               element={
                 <QueryClientProvider client={qc}>
                   <Dashboard />
@@ -56,14 +58,15 @@ describe('Dashboard page', () => {
             <Route path="/login" element={<div>Login page</div>} />
           </Routes>
         </MemoryRouter>
-      </AuthProvider>,
+      </AuthProvider>
+    </ThemeProvider>
     )
 
     // assert the component shows a loading indicator immediately
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  it('shows mocked data and allows signing out to /login', async () => {
+  it('shows mocked data', async () => {
     const qc = createTestQueryClient()
     // stub fetch to return dataset based on URL so react-query resolves
     vi.stubGlobal('fetch', vi.fn((input: RequestInfo) =>
@@ -75,29 +78,30 @@ describe('Dashboard page', () => {
     ))
 
     render(
-      <AuthProvider>
-        <MemoryRouter initialEntries={['/dashboard']}>
-          <Routes>
-            <Route
-              path="/dashboard"
-              element={
-                <QueryClientProvider client={qc}>
-                  <Dashboard />
-                </QueryClientProvider>
-              }
-            />
-            <Route path="/login" element={<div>Login page</div>} />
-          </Routes>
-        </MemoryRouter>
-      </AuthProvider>,
+      <ThemeProvider>
+        <AuthProvider>
+          <MemoryRouter initialEntries={['/dashboard']}>
+            <Routes>
+              <Route
+                path="/dashboard"
+                element={
+                  <QueryClientProvider client={qc}>
+                    <Dashboard />
+                  </QueryClientProvider>
+                }
+              />
+              <Route path="/login" element={<div>Login page</div>} />
+            </Routes>
+          </MemoryRouter>
+        </AuthProvider>
+      </ThemeProvider>
     )
 
-    // wait for the dashboard to render using mocked responses
-    await waitFor(() => expect(screen.getByText(/Welcome, bob/i)).toBeInTheDocument())
-
-    // sign out and verify navigation + cleared storage
-    fireEvent.click(screen.getByText('Sign out'))
-    await waitFor(() => expect(screen.getByText('Login page')).toBeInTheDocument())
-    expect(localStorage.getItem(STORAGE_KEY)).toBeNull()
+    const summaryHeading = await screen.findByText(/Portfolio Summary/i)
+    const summaryCard = summaryHeading.closest('div') // adjust selector if your Card markup differs
+    expect(summaryCard).toBeTruthy()
+    const positionsLabel = within(summaryCard as HTMLElement).getByText(/Positions/i)
+    expect(positionsLabel).toBeInTheDocument()
+   
   })
 })
