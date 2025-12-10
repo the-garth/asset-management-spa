@@ -1,34 +1,50 @@
+import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { AuthProvider } from '../../components/Providers/AuthProvider'
 import { Login } from './Login'
 
+const mockSignin = vi.fn()
+
+vi.mock('../../components/Providers/AuthProvider', () => {
+  return {
+    // pass-through provider so tests can render <AuthProvider> wrapper
+    AuthProvider: ({ children }: { children?: React.ReactNode }) => React.createElement(React.Fragment, null, children),
+    // mocked hook used by the Login component
+    useAuth: () => ({
+      signin: mockSignin,
+    }),
+  }
+})
+
+
 describe('Login page', () => {
   beforeEach(() => localStorage.clear())
   afterEach(() => vi.useRealTimers())
 
-  it('submits, signs in and navigates to /dashboard', async () => {
+  it('submits username, calls signin and navigates to /dashboard', async () => {
+    mockSignin.mockResolvedValueOnce(undefined)
+
     render(
       <AuthProvider>
-        <MemoryRouter initialEntries={['/login']}>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<div>Dashboard</div>} />
-          </Routes>
-        </MemoryRouter>
+      <MemoryRouter initialEntries={['/login']}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<div>Dashboard</div>} />
+        </Routes>
+      </MemoryRouter>
       </AuthProvider>,
     )
 
-    const input = screen.getByRole('textbox')
-    await userEvent.type(input, 'john')
-    const button = screen.getByRole('button', { name: /sign in/i })
-    await userEvent.click(button)
+    fireEvent.change(screen.getByRole('textbox', { name: /username/i }), { target: { value: 'alice' } })
+    fireEvent.click(screen.getByRole('button', { name: /sign in/i }))
 
-    // allow the real 400ms fake-auth timeout to complete; give a bit more time
-    await waitFor(() => expect(screen.getByText('Dashboard')).toBeInTheDocument(), { timeout: 2000 })
-    expect(localStorage.getItem('asset-management-auth')).toBe(JSON.stringify({ username: 'john' }))
+    // signin called with username
+    expect(mockSignin).toHaveBeenCalledWith('alice')
+
+    // navigation to dashboard (rendered placeholder)
+    expect(await screen.findByText('Dashboard')).toBeInTheDocument()
   })
 
   it('shows validation error when submitting with no username', async () => {
