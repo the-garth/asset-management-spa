@@ -5,8 +5,8 @@ import type { TimeSeriesPricePoint } from '../types/portfolioView';
 
 // Current snapshot prices for positions table / donut chart
 export const getCurrentPrices = (): Promise<Price[]> =>
-  apiGet<Price[]>('/mock-data/prices-current.json');
+  apiGet<Price[]>('/mockdata/prices-current.json');
 
 // Historical time-series for portfolio value chart
 export const getHistoricalPrices = (): Promise<TimeSeriesPricePoint[]> =>
-  apiGet<TimeSeriesPricePoint[]>('/mock-data/prices-history.json');
+  apiGet<TimeSeriesPricePoint[]>('/mockdata/prices-history.json');
