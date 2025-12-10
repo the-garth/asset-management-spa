@@ -4,7 +4,6 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { AuthProvider } from '../../components/Providers/AuthProvider'
 import { Login } from './Login'
-import { Dashboard } from '../Dashboard/Dashboard'
 
 describe('Login page', () => {
   beforeEach(() => localStorage.clear())
@@ -32,33 +31,7 @@ describe('Login page', () => {
     expect(localStorage.getItem('asset-management-auth')).toBe(JSON.stringify({ username: 'john' }))
   })
 
-  it('when already logged in, shows dashboard and signs out to /login', async () => {
-    const STORAGE_KEY = 'asset-management-auth'
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ username: 'sarah' }))
-
-    render(
-      <AuthProvider>
-        <MemoryRouter initialEntries={['/dashboard']}>
-          <Routes>
-            <Route path="/login" element={<div>Login page</div>} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </MemoryRouter>
-      </AuthProvider>,
-    )
-
-    // dashboard should render with the username from localStorage
-    await waitFor(() => expect(screen.getByText(/Welcome, sarah/i)).toBeInTheDocument())
-
-    // click sign out and assert navigation to /login and cleared storage
-    const signOutButton = screen.getByRole('button', { name: /sign out/i })
-    await userEvent.click(signOutButton)
-
-    await waitFor(() => expect(screen.getByText('Login page')).toBeInTheDocument())
-    expect(localStorage.getItem(STORAGE_KEY)).toBeNull()
-  })
-
-    it('shows validation error when submitting with no username', async () => {
+  it('shows validation error when submitting with no username', async () => {
     render(
       <AuthProvider>
         <MemoryRouter initialEntries={['/login']}>

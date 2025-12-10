@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { Login } from './pages/Login/Login'
 import { Dashboard } from './pages/Dashboard/Dashboard'
 import { useAuth } from './components/Providers/AuthProvider'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const auth = useAuth()
@@ -22,7 +25,9 @@ function AppRoutes() {
           path="/dashboard"
           element={
             <RequireAuth>
-              <Dashboard />
+              <QueryClientProvider client={queryClient}>
+                <Dashboard />
+              </QueryClientProvider>
             </RequireAuth>
           }
         />
