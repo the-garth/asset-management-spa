@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { AllocationItem } from '../../types/portfolioView';
-import './PortfolioDonutChart.css';
 
 interface PortfolioDonutChartProps {
   data: AllocationItem[];
@@ -25,8 +24,6 @@ export const PortfolioDonutChart: React.FC<PortfolioDonutChartProps> = ({
     value: item.value,
   }));
 
-  console.log('data', chartData)
-
   if (!chartData.length) {
     return (
       <div className="flex items-center justify-center h-64 text-sm text-slate-500">
@@ -37,7 +34,7 @@ export const PortfolioDonutChart: React.FC<PortfolioDonutChartProps> = ({
 
   return (
     <div className="w-full h-64 min-w-0 min-h-0 portfolio-donut-chart">
-      <ResponsiveContainer  width="100%" height="100%" minWidth={0} minHeight={0}>
+      <ResponsiveContainer  width="100%" height={256} minWidth={0} minHeight={0}>
         <PieChart>
           <Pie
             data={chartData}
