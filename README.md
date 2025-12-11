@@ -4,6 +4,7 @@ Small demo app that shows a portfolio dashboard driven by local mock data.
 
 Features
 
+- Uses auth for accessing the Dashboard - simple auth as in you can pass in any username (awareness is this is not secure, but implemented as simple as possible)
 - Portfolio Allocation donut chart (by asset / class) — see [src/pages/Dashboard/Dashboard.tsx](src/pages/Dashboard/Dashboard.tsx)
 - Portfolio Summary (total value, positions, portfolio as-of) — computed by [`buildPortfolioOverview`](src/utils/portfolioAggregation.ts)
 - Positions table (enriched positions with value and allocation)
@@ -111,6 +112,20 @@ yarn cypress:run
 3. Cypress E2E spec:
    - [cypress/e2e/login_and_dashboard.cy.ts](cypress/e2e/login_and_dashboard.cy.ts)
    - Fixtures used by E2E are under `cypress/fixtures/`
+
+### Screenshots
+
+Login screen:
+
+![Login screen](./assets/screenshots/signin.png)
+
+Dark theme dashboard:
+
+![Dashboard - Dark theme](./assets/screenshots/dashboard-dark.png)
+
+Light theme dashboard:
+
+![Dashboard - Light theme](./assets/screenshots/dashboard-light.png)
 
 ### Notes & troubleshooting
 
